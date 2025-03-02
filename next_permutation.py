@@ -1,14 +1,17 @@
 def next_permutation(t:tuple)->tuple:
     """
-    Given the input tuple, returns the next lexicographic tuple
-    in a given permutation of the tuple itself.
+    Given the input tuple, returns the next tuple in lexicographic order 
+    as if the input tuple was from a list of all possible permutations.
 
-    :param t: The tuple of any length.
+    :param t: The tuple of integers of any length.
     
-    :return: The next tuple in permutations list that is lexicographically larger.
+    :return: The tuple of integers that is the next lexicographic tuple in the list of permutations.
     """
     assert(isinstance(t, tuple)), "Input must be of type tuple"
     assert(len(t) > 0), "Tuple cannot be empty"
+    assert(len(set(t)) == len(t)), "Tuple must not contain duplicate elements"
+    for num in t:
+        assert(isinstance(num, int)), "Each number in the input tuple must be an integer"
 
     l = list(t)
     n = len(l)
@@ -39,7 +42,7 @@ def next_permutation(t:tuple)->tuple:
 
     return res
 
-
 if __name__ == "__main__":
-    l = (2,3,1)
-    print(next_permutation(l))
+    print(next_permutation((2,3,1)))
+    print(next_permutation((0, 5, 2, 1, 4, 7, 3, 6)))
+    print(next_permutation((3,2,1,0)))
