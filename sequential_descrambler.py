@@ -43,25 +43,30 @@ def descrambler(w, k):
         if length in words:
             final_perms[length] = words[length].intersection(tuples)
     print(final_perms)
-    generate_permutations(final_perms)
+    #combinations = generate_word_combinations(final_perms)
+    #for combo in combinations:
+    #    print(combo)
 
-def generate_permutations(d:dict):
-    # Extract all sets from the dictionary
-    sets = [d[key] for key,value in d.items()]
+def generate_word_combinations(word_dict):
+    # Sort keys to maintain order in the output
+    sorted_keys = sorted(word_dict.keys())
     
-    # Generate all combinations (one word from each set)
-    for comb in it.product(*sets):
-        # Generate all permutations of the combination
-        for perm in it.permutations(comb):
-            yield ' '.join(perm)
+    # Get corresponding word sets in order
+    word_sets = [word_dict[key] for key in sorted_keys]
+    
+    # Generate all possible combinations
+    combinations = list(it.product(*word_sets))
+    
+    return combinations
 
 
 
 
 # Example Usage
 w = 'trleeohelh'
-k=(5,5)
-descrambler(w,k)
-#descrambler('choeounokeoitg',(3,5,6))
+k=(8,2)
+#descrambler(w,k)
+descrambler('choeounokeoitg',(3,5,6))
+#descrambler('qeodwnsciseuesincereins',(4,9,10))
 #print(list(descrambler('qeodwnsciseuesincereins', (4,7,12))))
 #print(descrambler())
