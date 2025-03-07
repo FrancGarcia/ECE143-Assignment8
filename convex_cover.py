@@ -24,9 +24,12 @@ def find_convex_cover(pvertices, clist):
     clist = np.array(clist) 
     m = len(clist)  
     n = len(pvertices) 
+    # Calculates the euclidean distance between each polygon vertex and each circle center
+    # Reshape the numpy arrays to allow for broadcasting
     distances = np.linalg.norm(pvertices[:,None,:] - clist[None,:,:], axis=-1)
     min_indices = np.argmin(distances, axis=1)
     radius = np.zeros(m)
+    # Want to get the minimum radius that is farthest away from the polygon vertex but that encloses that same polygon vertex
     for i,index in enumerate(min_indices):
         radius[index] = max(radius[index], distances[i,index])
     return radius.tolist()
